@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.stateIn
 class PlayerWithScoresViewModel(private val playerWithScoresRepository: PlayersWithScoresRepository): ViewModel() {
     val playerWithScore = playerWithScoresRepository
         .getAllPlayerWithScores()
-        .stateIn(
+        .stateIn( // to z wykladu wziete
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000),
             initialValue = emptyList()

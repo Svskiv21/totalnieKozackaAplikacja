@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 class PlayerViewModel(private val playerRepository: PlayerRepository): ViewModel() {
     var playerId by mutableStateOf(0L)
-        private set
+        private set // z wykladu, zeby nie dalo sie bez uzycia metody dostac bezposrednio do tego pola z innej klasy
     var name by mutableStateOf("")
         private set
     var email by mutableStateOf("")
@@ -31,12 +31,12 @@ class PlayerViewModel(private val playerRepository: PlayerRepository): ViewModel
     }
 
     suspend fun savePlayer() {
-        try {
+        try { // sprawdzanie czy jest uzytkownik o takim mailu
             val player = playerRepository.getPlayerByEmail(email).first()
             val playerToUpdate = Player(player.player_id, player.name, player.email)
             playerRepository.updatePlayer(playerToUpdate)
             playerId = player.player_id
-        } catch (npe: NullPointerException) {
+        } catch (npe: NullPointerException) { // jak nei ma uzytkownika
             val player = Player(name = name, email = email)
             playerId = playerRepository.addPlayer(player)
         }

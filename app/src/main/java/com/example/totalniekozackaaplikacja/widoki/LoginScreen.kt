@@ -214,7 +214,7 @@ private fun ProfileImageWithPicker(profileImageUri: Uri?, selectImageOnClick: ()
                 IconButton(onClick = selectImageOnClick,
                     modifier = Modifier
                         .align(Alignment.TopEnd)) {
-                    Icon(painter = painterResource(id = R.drawable.baseline_question_mark_24),
+                    Icon(painter = painterResource(id = R.drawable.baseline_image_search_24),
                         contentDescription = "Image selector")
                 }
             }

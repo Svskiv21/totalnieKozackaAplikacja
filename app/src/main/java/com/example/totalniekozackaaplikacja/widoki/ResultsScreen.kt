@@ -36,6 +36,7 @@ fun ResultScreen(navController: NavHostController,
                  profileId: Long,
                  colorNumber: Int,
                  recentScore: Int,
+                 uri: String?,
                  playerWithScoresViewModel: PlayerWithScoresViewModel = viewModel( factory = AppViewModelProvider.Factory)
 ) {
     val scores by playerWithScoresViewModel.playerWithScore.collectAsState()
@@ -54,7 +55,8 @@ fun ResultScreen(navController: NavHostController,
         GameButtons(
             navController = navController,
             profileId = profileId,
-            colorNumber = colorNumber)
+            colorNumber = colorNumber,
+            uri = uri)
     }
 
 }
@@ -129,11 +131,11 @@ fun ListItem(playerWithScore: PlayerWithScores) {
 @Preview(showBackground = true)
 @Composable
 fun GameButtonsPreview() {
-    GameButtons(profileId = 0L, colorNumber = 0)
+    GameButtons(profileId = 0L, colorNumber = 0, uri = null)
 }
 
 @Composable
-fun GameButtons(navController: NavHostController = rememberNavController(), profileId: Long, colorNumber: Int) {
+fun GameButtons(navController: NavHostController = rememberNavController(), profileId: Long, colorNumber: Int, uri: String?) {
     Row (
         modifier = Modifier
             .fillMaxWidth()
@@ -143,7 +145,7 @@ fun GameButtons(navController: NavHostController = rememberNavController(), prof
         Button(onClick = { navController.navigate(route = RoutesMap.Login.route) }) {
             Text(text = "Logout")
         }
-        Button(onClick = { navController.navigate(route = RoutesMap.Game.route + "/$profileId/$colorNumber") }) {
+        Button(onClick = { navController.navigate(route = RoutesMap.Game.route + "/$profileId/$colorNumber?uri=$uri") }) {
             Text(text = "Restart game")
         }
     }

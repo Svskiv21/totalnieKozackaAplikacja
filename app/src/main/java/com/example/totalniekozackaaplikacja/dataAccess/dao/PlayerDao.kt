@@ -1,7 +1,6 @@
 package com.example.totalniekozackaaplikacja.dataAccess.dao
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -15,7 +14,7 @@ abstract class PlayerDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     abstract suspend fun addPlayer(playerEntity: Player): Long
 
-    @Query("Select * from `players`") // PAMIETAJ TYLDY NIE APOSTROFY DO NAZWY TABELI
+    @Query("Select * from `players`")
     abstract fun getAllPlayers(): Flow<List<Player>>
 
     @Query("select * from `players` where email = :email")

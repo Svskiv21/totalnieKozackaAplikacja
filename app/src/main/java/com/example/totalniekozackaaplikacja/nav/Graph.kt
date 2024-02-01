@@ -45,35 +45,50 @@ fun SetupNavGraph(navController: NavHostController) {
             )
         }
         composable(
-            route = RoutesMap.Game.route + "/{playerId}/{colorNumber}",
+            route = RoutesMap.Game.route + "/{playerId}/{colorNumber}?uri={uri}",
             arguments = listOf(
                 navArgument("colorNumber") {type = NavType.IntType},
-                navArgument("playerId") {type = NavType.LongType}
+                navArgument("playerId") {type = NavType.LongType},
+                navArgument("uri") {
+                    type = NavType.StringType
+                    defaultValue = null
+                    nullable = true
+                }
             )) {
                 backStackEntry ->
             val number = backStackEntry.arguments?.getInt("colorNumber")!!
             val playerId = backStackEntry.arguments?.getLong("playerId")!!
+            val uri = backStackEntry.arguments?.getString("uri")
             GameMainScreen(
                 navController = navController,
                 number = number,
-                playerId = playerId)
+                playerId = playerId,
+                uri = uri)
         }
-        composable(
-            route = RoutesMap.Results.route + "/{playerId}/{colorNumber}/{recentScore}",
+        composable( // backStackEntry
+            route = RoutesMap.Results.route + "/{playerId}/{colorNumber}/{recentScore}?uri={uri}",
             arguments = listOf(
                 navArgument("playerId") { type = NavType.LongType },
                 navArgument("colorNumber") { type = NavType.IntType },
-                navArgument("recentScore") {type = NavType.IntType}
+                navArgument("recentScore") {type = NavType.IntType},
+                navArgument("uri") {
+                    type = NavType.StringType
+                    defaultValue = null
+                    nullable = true
+                }
             )) {
                 backStackEntry ->
             val playerId = backStackEntry.arguments?.getLong("playerId")!!
             val colorNumber = backStackEntry.arguments?.getInt("colorNumber")!!
             val recentScore = backStackEntry.arguments?.getInt("recentScore")!!
+            val uri = backStackEntry.arguments?.getString("uri")
             ResultScreen(
                 navController = navController,
                 profileId = playerId,
                 colorNumber = colorNumber,
-                recentScore = recentScore)
+                recentScore = recentScore,
+                uri = uri
+            )
         }
     }
 }
