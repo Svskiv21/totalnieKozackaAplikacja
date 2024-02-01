@@ -10,21 +10,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.example.totalniekozackaaplikacja.nav.SetupNavGraph
 import com.example.totalniekozackaaplikacja.ui.theme.TotalnieKozackaAplikacjaTheme
 
 class MainActivity : ComponentActivity() {
+    lateinit var navHostController: NavHostController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            TotalnieKozackaAplikacjaTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-
-                }
-            }
+            navHostController = rememberNavController()
+            SetupNavGraph(navController = navHostController)
         }
     }
 }
