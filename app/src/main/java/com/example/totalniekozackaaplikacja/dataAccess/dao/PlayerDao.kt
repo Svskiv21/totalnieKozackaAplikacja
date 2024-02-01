@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.Flow
 abstract class PlayerDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    abstract suspend fun addPlayer(playerEntity: Player)
+    abstract suspend fun addPlayer(playerEntity: Player): Long
 
     @Query("Select * from `players`") // PAMIETAJ TYLDY NIE APOSTROFY DO NAZWY TABELI
     abstract fun getAllPlayers(): Flow<List<Player>>
@@ -25,5 +25,5 @@ abstract class PlayerDao {
     abstract suspend fun updatePlayer(playerEntity: Player)
 
     @Query("Select * from `players` where player_id=:id")
-    abstract fun getPlayerById(id:Long): Flow<Player>
+    abstract fun getPlayerById(id: Long): Flow<Player>
 }

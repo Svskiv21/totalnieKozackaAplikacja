@@ -5,8 +5,8 @@ import com.example.totalniekozackaaplikacja.model.Player
 import kotlinx.coroutines.flow.Flow
 
 class PlayerRepository(private val playerDao: PlayerDao) {
-    suspend fun addPlayer(player: Player){ // suspend jest do asynchronicznego wykonywania się funkcji
-        playerDao.addPlayer(player)
+    suspend fun addPlayer(player: Player) : Long{ // suspend jest do asynchronicznego wykonywania się funkcji
+        return playerDao.addPlayer(player)
     }
 
     fun getAllPlayers(): Flow<List<Player>> = playerDao.getAllPlayers() // Flow ma juz w sobie coroutines, wiec nie trzeba dawac suspend
